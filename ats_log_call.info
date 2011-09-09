@@ -1,0 +1,7 @@
+name = ats_log_call
+description = "ATS log call"
+package = ukrshgz
+version = 7.x-0.1-dev
+core = 7.x
+files[] = ats_log_call.module
+

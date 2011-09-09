@@ -1,0 +1,48 @@
+<?php
+
+
+/**
+ * Implements hook_help().
+ */
+function ats_log_call_help($path, $arg) {
+
+  switch ($path) {
+    case 'admin/help#ats_log_call':
+      $output = '';
+      $output .= '<h3>' . 'Статистика телефонных звонков' . '</h3>';
+      $output .= '<p>' . 'Позволяет просматрифать статистику звонков офисной АТС ГП "Укршахтгидрозащита" ' . '</p>';
+      return $output;
+
+  }
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function ats_log_call_menu() {
+  $items['ats-log-call'] = array(
+    'title' => 'Статистика телефонных звонков',
+    'description' => 'Позволяет просматрифать статистику звонков офисной АТС ГП "Укршахтгидрозащита".',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('node_admin_content'),
+    'access arguments' => array('access content overview'),
+    'weight' => -10,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function ats_log_call_permission() {
+  return array(
+    'administer url aliases' => array(
+      'title' => t('Administer URL aliases'),
+    ),
+    'create url aliases' => array(
+      'title' => t('Create and edit URL aliases'),
+    ),
+  );
+}
