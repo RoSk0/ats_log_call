@@ -44,8 +44,6 @@ function ats_log_call_list() {
   
   $rows = $result->fetchAll(PDO::FETCH_ASSOC);
   
-  $stop = microtime(true);
-  dpm($stop - $start,'Used seonds');
   $output .= theme('table', array( 'rows' => $rows));
 
   return $output;
