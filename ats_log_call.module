@@ -31,12 +31,21 @@ function ats_log_call_list() {
   $result = $select->execute();
   $rows = array();
   $i = 0;
-  while ($row = $result->fetchAssoc()) {
-    $rows[] = $row;
-//    dpm($row,'Row ' . $i);
-    $i++;
-  }
-//  dpm($rows,'Rows');
+
+/** Поскольку данніе в нашем случае попадают в базу непосредственно из мини-АТС
+ *  будем считать их безопасными и не будем использовать построчную выборку 
+ *  результатов с проверкой на "чистоту" 
+ *
+ * while ($row = $result->fetchAssoc()) {
+ *   $rows[] = array_map('check_plain', (array) $row);
+ * }
+ */
+  
+  
+  $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+  
+  $stop = microtime(true);
+  dpm($stop - $start,'Used seonds');
   $output .= theme('table', array( 'rows' => $rows));
 
   return $output;
