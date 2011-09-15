@@ -29,8 +29,6 @@ function ats_log_call_list() {
   ->extend('PagerDefault')
   ->limit(30);
   $result = $select->execute();
-  $rows = array();
-  $i = 0;
 
 /** Поскольку данніе в нашем случае попадают в базу непосредственно из мини-АТС
  *  будем считать их безопасными и не будем использовать построчную выборку 
@@ -42,9 +40,10 @@ function ats_log_call_list() {
  */
   
   
+  $rows = array();
   $rows = $result->fetchAll(PDO::FETCH_ASSOC);
   
   $output .= theme('table', array( 'rows' => $rows));
-
+  $output .= theme('pager');
   return $output;
 }
