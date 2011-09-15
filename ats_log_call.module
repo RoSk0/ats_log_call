@@ -21,6 +21,20 @@ function ats_log_call_menu() {
 
 
 function ats_log_call_list() {
+
+$header = array(
+  array('data' => 'ID звонка',     'field' => 'id'),
+  array('data' => 'ID АТС', 'field' => 'ats_id'),
+  array('data' => 'Дата звонка',           'field' => 'dates'),
+  array('data' => 'Время звонка',           'field' => 'time'),
+  array('data' => 'Ожидание ответа',           'field' => 'call_time_wait'),
+  array('data' => 'Время развогвора',           'field' => 'call_time'),
+  array('data' => 'Внутренний номер',           'field' => 'internal_number'),
+  array('data' => 'Внешний номер',           'field' => 'external_number'),
+  array('data' => 'Исходящяя линия',           'field' => 'external_line'),
+  array('data' => 'Тип звонка',           'field' => 'type_call'),
+);  
+
   $output = '';
   
   $select = db_select('ats_log_call','a')
@@ -43,7 +57,7 @@ function ats_log_call_list() {
   $rows = array();
   $rows = $result->fetchAll(PDO::FETCH_ASSOC);
   
-  $output .= theme('table', array( 'rows' => $rows));
+  $output .= theme('table', array( 'header' => $header, 'rows' => $rows));
   $output .= theme('pager');
   return $output;
 }
